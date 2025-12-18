@@ -2,22 +2,6 @@
 
 ---
 
----
-
-## 📌 Quick Navigation
-- ✨ [Overview](#overview)
-- ⚠️ [Problem Statement](#problem-statement)
-- ⚙️ [Methodology](#methodology)
-- 🔄 [System Architecture](#system-architecture)
-- 🗃️ [Dataset Description](#dataset-description)
-- 🛠️ [Feature Engineering & Preprocessing](#feature-engineering--preprocessing)
-- 💻 [Tech Stack](#tech-stack)
-- 📊 [Results & Observations](#results--observations)
-- ✅ [Conclusion](#conclusion)
-- 🚀 [Future Scope](#future-scope)
-
----
-
 ## ✨ Overview
 
 TasteLens is a personalized food recommendation system that suggests food items based on individual preferences. The system leverages multiple machine learning models to analyze user behavior and item characteristics, enabling more accurate and diverse recommendations.
