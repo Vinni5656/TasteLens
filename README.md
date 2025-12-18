@@ -20,7 +20,7 @@ The project explores different recommendation strategies and combines them to im
 
 ---
 
-## Approach / Methodology
+## Methodology
 
 TasteLens follows a **multi-model recommendation approach** to deliver personalized food suggestions. Different recommendation techniques capture unique aspects of user behavior, and combining them improves overall recommendation quality.
 
@@ -96,6 +96,8 @@ Hybrid Integration
 Final Personalized Recommendations
 ```
 
+---
+
 ## Dataset Description
 
 The dataset used in the TasteLens project consists of **1,500 records** representing user–food interactions. Each record captures detailed food attributes, nutritional information, user preferences, and contextual restaurant data. This enables the implementation of content-based, collaborative, and hybrid recommendation models.
@@ -153,7 +155,7 @@ Each row corresponds to a single interaction between a user and a food item, and
 
 The TasteLens dataset was preprocessed and transformed to extract meaningful features for all four recommendation models: Content-Based, User-Based Collaborative Filtering (UBCF), Item-Based Collaborative Filtering (IBCF), and Hybrid. The goal was to ensure that each model could effectively capture user preferences and item similarities.
 
-### Content-Based Filtering
+### 1. Content-Based Filtering
 
 - **Feature Combination**: Multiple text-based features were combined into a single representation with weighted importance:
 
