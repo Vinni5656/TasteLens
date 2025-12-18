@@ -5,16 +5,16 @@
 ---
 
 ## 📌 Quick Navigation
-- ✨ [Overview](#✨-overview)
-- ⚠️ [Problem Statement](#⚠️-problem-statement)
-- ⚙️ [Methodology](#⚙️-methodology)
-- 🔄 [System Architecture](#🔄-system-architecture)
-- 🗃️ [Dataset Description](#🗃️-dataset-description)
-- 🛠️ [Feature Engineering & Preprocessing](#🛠️-feature-engineering--preprocessing)
-- 💻 [Tech Stack](#💻-tech-stack)
-- 📊 [Results & Observations](#📊-results--observations)
-- ✅ [Conclusion](#✅-conclusion)
-- 🚀 [Future Scope](#🚀-future-scope)
+- ✨ [Overview](#overview)
+- ⚠️ [Problem Statement](#problem-statement)
+- ⚙️ [Methodology](#methodology)
+- 🔄 [System Architecture](#system-architecture)
+- 🗃️ [Dataset Description](#dataset-description)
+- 🛠️ [Feature Engineering & Preprocessing](#feature-engineering--preprocessing)
+- 💻 [Tech Stack](#tech-stack)
+- 📊 [Results & Observations](#results--observations)
+- ✅ [Conclusion](#conclusion)
+- 🚀 [Future Scope](#future-scope)
 
 ---
 
