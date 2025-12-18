@@ -1,1 +1,286 @@
 # TasteLens
+---
+
+## Overview
+
+TasteLens is a personalized food recommendation system that suggests food items based on individual preferences. The system leverages multiple machine learning models to analyze user behavior and item characteristics, enabling more accurate and diverse recommendations.
+
+The project explores different recommendation strategies and combines them to improve personalization and recommendation quality.
+
+---
+
+## Problem Statement
+
+- Food platforms offer a wide range of choices, making it difficult for users to find dishes that match their personal preferences.  
+- Most recommendation systems rely on generic or popularity-based suggestions, which fail to capture individual tastes.  
+- Personalized food recommendation is challenging due to subjective user preferences and the lack of suitable, real-world food preference datasets.  
+- Using a single recommendation approach often results in biased or less accurate suggestions.  
+
+**TasteLens** aims to address these challenges by applying multiple machine learning–based recommendation models and combining them through a hybrid approach to deliver more relevant and personalized food recommendations.
+
+---
+
+## Approach / Methodology
+
+TasteLens follows a **multi-model recommendation approach** to deliver personalized food suggestions. Different recommendation techniques capture unique aspects of user behavior, and combining them improves overall recommendation quality.
+
+### 1. Content-Based Filtering
+- Recommends food items by analyzing item attributes and user preferences.
+- Builds a preference profile for each user based on past interactions.
+- Suggests food items with similar characteristics.
+- **Advantages:** Effective personalization even when user interaction data is limited.
+
+### 2. User-Based Collaborative Filtering (UBCF)
+- Identifies users with similar taste patterns by comparing their rating behavior.
+- Recommends items liked by similar users to the target user.
+- **Advantages:** Introduces variety beyond a single user’s history by leveraging shared preferences.
+
+### 3. Item-Based Collaborative Filtering (IBCF)
+- Focuses on relationships between food items rather than users.
+- Items receiving similar ratings from multiple users are considered related.
+- When a user interacts with a food item, similar items are recommended.
+- **Advantages:** Stable and efficient recommendation generation.
+
+### 4. Hybrid Recommendation Model
+- Combines content-based filtering with collaborative filtering techniques.
+- Aggregates recommendations from individual models to produce the final output.
+- **Advantages:** Reduces over-specialization, improves recommendation diversity, and provides balanced results compared to using a single model.
+
+---
+
+## System Architecture / Workflow
+
+TasteLens is designed as a **modular recommendation system**, where each component transforms user preference data into meaningful food recommendations. The architecture supports multiple recommendation models and allows their outputs to be combined in a structured manner.
+
+### Architecture Overview
+The system processes user–food interaction data through a sequence of well-defined stages, ensuring accuracy, scalability, and clarity in recommendation generation.
+
+### Workflow Description
+
+1. **User Preference Data Input**
+   - Accepts user interaction data including user IDs, food item IDs, ratings, and basic item attributes.
+   - This data represents individual taste patterns and serves as the foundation for personalization.
+
+2. **Data Preprocessing and Preparation**
+   - Cleans and standardizes raw data for consistency across models.
+   - Handles missing values, normalizes ratings, and transforms data into model-compatible formats.
+
+3. **Independent Model Training**
+   - Each recommendation model (Content-Based, User-Based CF, Item-Based CF) is trained independently.
+   - Each model captures unique aspects of user behavior and item similarity.
+
+4. **Model-Specific Recommendation Generation**
+   - Trained models generate individual recommendation lists based on their methodology.
+   - Each list reflects a different perspective on user preference and similarity.
+
+5. **Hybrid Recommendation Integration**
+   - Aggregates recommendations from all models using a hybrid strategy.
+   - Balances personalization and diversity while reducing bias from any single model.
+
+6. **Final Recommendation Output**
+   - Integrated recommendation list is presented as the final output.
+   - Delivers personalized and relevant food suggestions to users.
+
+### System Flow Diagram
+```bash
+User Interaction Data
+        ↓
+Data Preprocessing
+        ↓
+Model Training (CBF | UBCF | IBCF)
+        ↓
+Individual Recommendations
+        ↓
+Hybrid Integration
+        ↓
+Final Personalized Recommendations
+```
+
+## Dataset Description
+
+The dataset used in the TasteLens project consists of **1,500 records** representing user–food interactions. Each record captures detailed food attributes, nutritional information, user preferences, and contextual restaurant data. This enables the implementation of content-based, collaborative, and hybrid recommendation models.
+
+### Dataset Structure
+
+Each row corresponds to a single interaction between a user and a food item, and includes the following attributes:
+
+#### User Information
+- `user_id`: Unique identifier for each user
+
+#### Food Item Details
+- `food_id`: Unique identifier for each food item  
+- `dish_name`: Name of the dish  
+- `cuisine`: Cuisine category  
+- `course`: Type of course (starter, main, dessert, etc.)  
+- `ingredients`: Key ingredients used in the dish  
+- `img_url`: URL of the dish image for visual representation  
+
+#### Nutritional Information
+- `calories`: Energy content  
+- `protein_g`, `fat_g`, `carbs_g`, `fiber_g`, `sugar_g`: Macronutrients  
+- `sodium_mg`: Sodium content  
+
+#### Preparation & Dietary Context
+- `prep_time_min`: Estimated preparation time  
+- `diet_type`: Dietary category  
+- `allergies`: Known allergens  
+- `goals`: User dietary goals  
+
+#### User Interaction Data
+- `rating`: User rating  
+- `liked`: Binary preference indicator  
+- `times_ordered`: Number of times ordered  
+
+#### Restaurant Information
+- `restaurant_id`: Unique identifier  
+- `restaurant_name`: Name of the restaurant  
+- `location`: Restaurant location  
+- `cuisine_type`: Cuisine offered  
+- `delivery_time`: Estimated delivery time  
+- `average_cost`: Average order cost  
+
+#### Temporal Data
+- `timestamp`: Time of interaction  
+
+### Dataset Usage
+- Dish attributes and `img_url` support **content-based recommendations** and UI-level visualization.  
+- Ratings and interaction data are used for **collaborative filtering**.  
+- Combined features contribute to the **hybrid recommendation model**.
+
+---
+
+## Feature Engineering & Preprocessing
+
+The TasteLens dataset was preprocessed and transformed to extract meaningful features for all four recommendation models: Content-Based, User-Based Collaborative Filtering (UBCF), Item-Based Collaborative Filtering (IBCF), and Hybrid. The goal was to ensure that each model could effectively capture user preferences and item similarities.
+
+1. **Content-Based Filtering**
+
+- **Feature Combination**: Multiple text-based features were combined into a single representation with weighted importance:
+
+```bash
+combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
+```
+
+- **Missing Values**: Filled any missing values in the **combined text column** with empty strings.
+- **Vectorization**: Used **`TfidfVectorizer`** to convert textual features into **numerical vectors**.
+- **Similarity Calculation**: Computed **cosine similarity** between dishes to identify **similar items** for each user.
+
+
+2. **Item-Based Collaborative Filtering (IBCF)**
+
+- **Relevant Columns**: Extracted `user_id`, `dish_name`, and `rating`.
+- **Data Cleaning**: Converted **ratings** to numeric and dropped rows with **missing values**.
+- **Index Mapping**: Created **numeric mappings** for users and items to build a **sparse user-item matrix**.
+- **Similarity Computation**: Applied **cosine similarity** on the **transposed matrix (items × users)** to measure **item-item similarity**.
+
+
+3. **User-Based Collaborative Filtering (UBCF)**
+
+- **User-Item Matrix**: Rows = `user_id`, Columns = `dish_name`, Values = `rating`.
+- **Missing Values**: Handled appropriately to ensure **matrix completeness**.
+- **Similarity Computation**: Applied **cosine similarity** on the **user-item matrix** to identify **similar users**.
+- **Evaluation**: Split dataset into **train and test sets** to assess **model performance**.
+
+
+4. **Hybrid Recommendation Model**
+
+- **Approach**: Combined **explicit collaborative filtering (SVD-based)** with **content-based similarity features**.
+- **Text Features**: Concatenated `dish_name`, `cuisine`, and `restaurant_name` and vectorized using **TF-IDF**.
+- **Similarity Calculation**: Computed **cosine similarity** for **content-based features**.
+- **SVD Collaborative Filtering**: Trained model on **user-food ratings** using the **`surprise` library**.
+- **Final Recommendations**: Aggregated predictions from **both approaches** to generate **robust recommendations**.
+
+
+## Key Insights
+
+- **Preprocessing** ensured all models received **clean, structured, and meaningful input**.
+- Transformed **text features, numerical ratings, and user interactions** into **model-compatible formats**.
+- **Cosine similarity** and **matrix factorization (SVD)** formed the backbone of the **recommendation calculations**.
+
+---
+
+## TasteLens Project: Technology Stack
+
+The **TasteLens** project leverages **frontend, backend, and machine learning technologies** to deliver a complete **food recommendation system**.
+
+
+1. **Frontend**
+
+- **React.js** – For building a **responsive, dynamic user interface**.
+- **JSX** – To structure **UI components** and seamlessly integrate **JavaScript with HTML**.
+
+
+2. **Backend**
+
+- **Python** – Handles **server-side logic**, **API requests**, and **ML model integration**.
+- **Flask / FastAPI** – Serves **APIs** that connect the frontend with **machine learning models**.
+
+
+3. **Machine Learning**
+
+- **Content-Based Filtering** – Uses **TF-IDF vectorization** and **cosine similarity**.
+- **Collaborative Filtering (User-Based & Item-Based)** – Computes **cosine similarity** on **user-item matrices**.
+- **Hybrid Model** – Combines **SVD-based collaborative filtering** with **content-based features**.
+
+
+4. **Libraries & Tools**
+
+- **Pandas, NumPy** – For **data manipulation** and **preprocessing**.
+- **Scikit-learn** – For **TF-IDF vectorization** and **similarity calculations**.
+- **Surprise** – Implements **SVD collaborative filtering**.
+- **Scipy (csr_matrix)** – For **sparse matrix operations** in collaborative filtering.
+
+---
+
+## 📊 Results & Observations
+
+The **TasteLens** system was evaluated using **Precision@5**, **Recall@5**, and **F1 Score@5** metrics for all four recommendation models. These metrics measure how accurately the system recommends **relevant dishes** to users.
+
+| Model                               | Precision@5 | Recall@5 | F1 Score@5 |
+|-------------------------------------|------------|----------|------------|
+| **Content-Based Filtering**          | 0.026      | 0.061    | 0.036      |
+| **User-Based Collaborative Filtering** | 0.490      | 1.000    | 0.658      |
+| **Item-Based Collaborative Filtering** | 0.5607     | 0.7791   | 0.6521     |
+| **Hybrid Recommendation**            | 0.6187     | 1.0000   | 0.7645     |
+
+
+### 🔑 Key Observations
+
+- **Content-Based Filtering (CBF)**: Performs poorly due to **limited user-specific feature information**, resulting in **low precision and recall**.  
+- **User-Based Collaborative Filtering (UBCF)**: Achieves **high recall** but **moderate precision**, indicating it recommends **most relevant items** but may include **less precise suggestions**.  
+- **Item-Based Collaborative Filtering (IBCF)**: Balances **precision and recall** better than UBCF, showing **effective similarity-based item recommendations**.  
+- **Hybrid Model**: Outperforms all other models with the **highest F1 Score**, demonstrating that combining **content-based and collaborative filtering techniques** provides the **most balanced and accurate recommendations**.
+
+
+### Final Observations
+
+- Individual models capture different aspects of **user preferences**, but a **hybrid approach** significantly improves **overall recommendation quality**.  
+- The system is capable of delivering **personalized and relevant food suggestions** despite limitations in **dataset size and scope**.
+
+---
+### Conclusion
+
+**TasteLens** demonstrates the effectiveness of a **multi-model recommendation system** for personalized food suggestions. By combining **content-based filtering**, **user-based and item-based collaborative filtering**, and a **hybrid approach**, the system can:
+
+- **Capture individual user preferences**.  
+- **Recommend items based on similar users and similar dishes**.  
+- **Balance personalization and diversity** through hybrid aggregation.
+
+**Evaluation Insights**:
+
+- **Content-Based Filtering (CBF)** alone performs poorly due to limited user-specific features.  
+- **Collaborative Filtering techniques (UBCF & IBCF)** significantly improve recommendation quality.  
+- The **Hybrid Model** outperforms all individual approaches, achieving the **highest F1 Score**, highlighting that **combining multiple strategies** is crucial for **accurate and relevant recommendations**.
+
+---
+
+## 🚀 Future Scope
+
+- **Larger and Real-World Dataset**: Incorporate a more **extensive user dataset** to improve **model accuracy** and **generalization**.  
+- **Dynamic User Preferences**: Add **temporal modeling** to capture **changing user tastes over time**.  
+- **Context-Aware Recommendations**: Consider factors such as **time of day**, **location**, or **dietary restrictions** to enhance **personalization**.  
+- **Visual Recommendation Features**: Utilize the **`img_url` column** for **image-based similarity** or **deep learning–driven recommendations**.  
+- **Integration with Live Platforms**: Deploy TasteLens as a **web or mobile app** with **real-time recommendation updates**.  
+- **Advanced Hybrid Techniques**: Experiment with **ensemble methods**, **deep learning**, or **graph-based recommendation models** for further improvement.
+
+---
