@@ -153,7 +153,7 @@ Each row corresponds to a single interaction between a user and a food item, and
 
 The TasteLens dataset was preprocessed and transformed to extract meaningful features for all four recommendation models: Content-Based, User-Based Collaborative Filtering (UBCF), Item-Based Collaborative Filtering (IBCF), and Hybrid. The goal was to ensure that each model could effectively capture user preferences and item similarities.
 
-1. **Content-Based Filtering**
+### Content-Based Filtering
 
 - **Feature Combination**: Multiple text-based features were combined into a single representation with weighted importance:
 
@@ -167,7 +167,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 
 <br>
 
-2. **Item-Based Collaborative Filtering (IBCF)**
+### 2. Item-Based Collaborative Filtering (IBCF)
 
 - **Relevant Columns**: Extracted `user_id`, `dish_name`, and `rating`.
 - **Data Cleaning**: Converted **ratings** to numeric and dropped rows with **missing values**.
@@ -176,7 +176,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 
 <br>
 
-3. **User-Based Collaborative Filtering (UBCF)**
+### 3. User-Based Collaborative Filtering (UBCF)
 
 - **User-Item Matrix**: Rows = `user_id`, Columns = `dish_name`, Values = `rating`.
 - **Missing Values**: Handled appropriately to ensure **matrix completeness**.
@@ -185,7 +185,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 
 <br>
 
-4. **Hybrid Recommendation Model**
+### 4. Hybrid Recommendation Model
 
 - **Approach**: Combined **explicit collaborative filtering (SVD-based)** with **content-based similarity features**.
 - **Text Features**: Concatenated `dish_name`, `cuisine`, and `restaurant_name` and vectorized using **TF-IDF**.
@@ -203,26 +203,26 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 
 ---
 
-## TasteLens Project: Technology Stack
+## Tech Stack
 
 The **TasteLens** project leverages **frontend, backend, and machine learning technologies** to deliver a complete **food recommendation system**.
 
 
-1. **Frontend**
+### 1. Frontend
 
 - **React.js** – For building a **responsive, dynamic user interface**.
 - **JSX** – To structure **UI components** and seamlessly integrate **JavaScript with HTML**.
 
 <br>
 
-2. **Backend**
+### 2. Backend
 
 - **Python** – Handles **server-side logic**, **API requests**, and **ML model integration**.
 - **Flask / FastAPI** – Serves **APIs** that connect the frontend with **machine learning models**.
 
 <br>
 
-3. **Machine Learning**
+### 3. Machine Learning
 
 - **Content-Based Filtering** – Uses **TF-IDF vectorization** and **cosine similarity**.
 - **Collaborative Filtering (User-Based & Item-Based)** – Computes **cosine similarity** on **user-item matrices**.
@@ -230,7 +230,7 @@ The **TasteLens** project leverages **frontend, backend, and machine learning te
 
 <br>
 
-4. **Libraries & Tools**
+### 4. Libraries & Tools
 
 - **Pandas, NumPy** – For **data manipulation** and **preprocessing**.
 - **Scikit-learn** – For **TF-IDF vectorization** and **similarity calculations**.
@@ -267,7 +267,7 @@ The **TasteLens** system was evaluated using **Precision@5**, **Recall@5**, and 
 - The system is capable of delivering **personalized and relevant food suggestions** despite limitations in **dataset size and scope**.
 
 ---
-### Conclusion
+## Conclusion
 
 **TasteLens** demonstrates the effectiveness of a **multi-model recommendation system** for personalized food suggestions. By combining **content-based filtering**, **user-based and item-based collaborative filtering**, and a **hybrid approach**, the system can:
 
@@ -275,7 +275,7 @@ The **TasteLens** system was evaluated using **Precision@5**, **Recall@5**, and 
 - **Recommend items based on similar users and similar dishes**.  
 - **Balance personalization and diversity** through hybrid aggregation.
 
-**Evaluation Insights**:
+### Evaluation Insights:
 
 - **Content-Based Filtering (CBF)** alone performs poorly due to limited user-specific features.  
 - **Collaborative Filtering techniques (UBCF & IBCF)** significantly improve recommendation quality.  
