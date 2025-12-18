@@ -165,6 +165,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 - **Vectorization**: Used **`TfidfVectorizer`** to convert textual features into **numerical vectors**.
 - **Similarity Calculation**: Computed **cosine similarity** between dishes to identify **similar items** for each user.
 
+<br>
 
 2. **Item-Based Collaborative Filtering (IBCF)**
 
@@ -173,6 +174,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 - **Index Mapping**: Created **numeric mappings** for users and items to build a **sparse user-item matrix**.
 - **Similarity Computation**: Applied **cosine similarity** on the **transposed matrix (items × users)** to measure **item-item similarity**.
 
+<br>
 
 3. **User-Based Collaborative Filtering (UBCF)**
 
@@ -181,6 +183,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 - **Similarity Computation**: Applied **cosine similarity** on the **user-item matrix** to identify **similar users**.
 - **Evaluation**: Split dataset into **train and test sets** to assess **model performance**.
 
+<br>
 
 4. **Hybrid Recommendation Model**
 
@@ -190,6 +193,7 @@ combined = cuisine (2x) + diet_type (1.5x) + course + ingredients + goals
 - **SVD Collaborative Filtering**: Trained model on **user-food ratings** using the **`surprise` library**.
 - **Final Recommendations**: Aggregated predictions from **both approaches** to generate **robust recommendations**.
 
+<br>
 
 ## Key Insights
 
@@ -209,12 +213,14 @@ The **TasteLens** project leverages **frontend, backend, and machine learning te
 - **React.js** – For building a **responsive, dynamic user interface**.
 - **JSX** – To structure **UI components** and seamlessly integrate **JavaScript with HTML**.
 
+<br>
 
 2. **Backend**
 
 - **Python** – Handles **server-side logic**, **API requests**, and **ML model integration**.
 - **Flask / FastAPI** – Serves **APIs** that connect the frontend with **machine learning models**.
 
+<br>
 
 3. **Machine Learning**
 
@@ -222,6 +228,7 @@ The **TasteLens** project leverages **frontend, backend, and machine learning te
 - **Collaborative Filtering (User-Based & Item-Based)** – Computes **cosine similarity** on **user-item matrices**.
 - **Hybrid Model** – Combines **SVD-based collaborative filtering** with **content-based features**.
 
+<br>
 
 4. **Libraries & Tools**
 
@@ -243,6 +250,7 @@ The **TasteLens** system was evaluated using **Precision@5**, **Recall@5**, and 
 | **Item-Based Collaborative Filtering** | 0.5607     | 0.7791   | 0.6521     |
 | **Hybrid Recommendation**            | 0.6187     | 1.0000   | 0.7645     |
 
+<br>
 
 ### 🔑 Key Observations
 
@@ -251,6 +259,7 @@ The **TasteLens** system was evaluated using **Precision@5**, **Recall@5**, and 
 - **Item-Based Collaborative Filtering (IBCF)**: Balances **precision and recall** better than UBCF, showing **effective similarity-based item recommendations**.  
 - **Hybrid Model**: Outperforms all other models with the **highest F1 Score**, demonstrating that combining **content-based and collaborative filtering techniques** provides the **most balanced and accurate recommendations**.
 
+<br>
 
 ### Final Observations
 
@@ -276,11 +285,26 @@ The **TasteLens** system was evaluated using **Precision@5**, **Recall@5**, and 
 
 ## 🚀 Future Scope
 
+### 1. Dataset & Personalization
 - **Larger and Real-World Dataset**: Incorporate a more **extensive user dataset** to improve **model accuracy** and **generalization**.  
-- **Dynamic User Preferences**: Add **temporal modeling** to capture **changing user tastes over time**.  
-- **Context-Aware Recommendations**: Consider factors such as **time of day**, **location**, or **dietary restrictions** to enhance **personalization**.  
-- **Visual Recommendation Features**: Utilize the **`img_url` column** for **image-based similarity** or **deep learning–driven recommendations**.  
+- **Dynamic User Preferences**: Use **temporal modeling** to capture **changing tastes over time**.  
+- **Enhanced Personalization**: Analyze **user behavior, preferences, and context** for **highly tailored recommendations**.  
+- **Context-Aware Recommendations**: Consider **time of day**, **location**, or **dietary restrictions** for smarter suggestions.
+
+<br>
+
+### 2. Platform & Features
+- **Full-Fledged Website with Dashboards**: Build a **web platform** with **multiple dashboards** for users, admins, and restaurants, providing a **smooth and interactive experience**.  
 - **Integration with Live Platforms**: Deploy TasteLens as a **web or mobile app** with **real-time recommendation updates**.  
-- **Advanced Hybrid Techniques**: Experiment with **ensemble methods**, **deep learning**, or **graph-based recommendation models** for further improvement.
+- **Visual Recommendation Features**: Use the **`img_url` column** for **image-based similarity** or **deep learning-driven recommendations**.
+
+<br>
+
+### 3. Unique & Advanced Features
+- **Unique Feature Ideas**:  
+  - **Recipe Mood Match**: Recommend dishes based on **mood, weather, or cravings**.  
+  - **Image-Based Search**: Suggest dishes similar to a **user-uploaded photo**.  
+  - **Gamification / Rewards**: Introduce **points or achievements** to increase **engagement**.  
+- **Advanced Hybrid Techniques**: Experiment with **ensemble methods**, **deep learning**, or **graph-based recommendation models** to further enhance recommendations.
 
 ---
